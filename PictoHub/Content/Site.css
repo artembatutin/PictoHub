@@ -21,10 +21,15 @@
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
+input, select, textarea {
     max-width: 280px;
+    background-color: #b17038;
+    border: 1px solid #dc8438;
+}
+
+.form-control {
+    background-color: #b17038;
+    border: 1px solid #dc8438;
 }
 
 .navbar-inverse {
@@ -36,13 +41,20 @@ textarea {
     margin-bottom: 30px;
 }
 
-.navbar-inverse .navbar-brand {
-    color: white;
+.form-control:focus {
+    border-color: #e2b084;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(195, 137, 87);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgb(195, 137, 87);
 }
 
-.navbar-inverse .navbar-nav > li > a {
-     color: white;
+.navbar-inverse .navbar-brand {
+   color: white;
 }
+
+    .navbar-inverse .navbar-nav > li > a {
+        color: white;
+    }
 
 .jumbotron {
     margin-top: 30px;
@@ -62,3 +74,138 @@ footer {
     -webkit-box-shadow: inset 0 0 20px #4a354f;
     box-shadow: inset 0 0 20px #4a354f;
 }
+
+.board-link {
+    color: white;
+    transition: all 0.3s ease-out;
+    -webkit-transition: all 0.3s ease-out;
+    -moz-transition: all 0.3s ease-out;
+    -o-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+}
+
+.board-link :hover {
+   color: white;
+   text-decoration: none;
+   filter: brightness(125%);
+}
+
+.board-link :hover {
+    color: white;
+    text-decoration: none;
+}
+
+.jumbotron h2 :hover {
+    margin-left: 20px;
+}
+
+.jumbotron h2 {
+    padding: 5px;
+}
+
+.jumbotron p {
+    margin-left: 15px;
+}
+
+.jumbotron-GREEN {
+    background-color: #296f55;
+    -moz-box-shadow: inset 0 0 10px #1b523e;
+    -webkit-box-shadow: inset 0 0 10px #1b523e;
+    box-shadow: inset 0 0 10px #1b523e;
+}
+
+.jumbotron-RED {
+    background-color: #6f2929;
+    -moz-box-shadow: inset 0 0 10px #581e1e;
+    -webkit-box-shadow: inset 0 0 10px #581e1e;
+    box-shadow: inset 0 0 10px #581e1e;
+}
+
+.jumbotron-PURPLE {
+    background-color: #6f2948;
+    -moz-box-shadow: inset 0 0 10px #521b33;
+    -webkit-box-shadow: inset 0 0 10px #521b33;
+    box-shadow: inset 0 0 10px #521b33;
+}
+
+.jumbotron-MAUVE {
+    background-color: #64296f;
+    -moz-box-shadow: inset 0 0 10px #491b52;
+    -webkit-box-shadow: inset 0 0 10px #491b52;
+    box-shadow: inset 0 0 10px #491b52;
+}
+
+.jumbotron-YELLOWISH_GREEN {
+    background-color: #4c6f29;
+    -moz-box-shadow: inset 0 0 10px #38521e;
+    -webkit-box-shadow: inset 0 0 10px #38521e;
+    box-shadow: inset 0 0 10px #38521e;
+}
+
+.jumbotron-DARK_PURPLE {
+    background-color: #57296f;
+    -moz-box-shadow: inset 0 0 10px #3e1a51;
+    -webkit-box-shadow: inset 0 0 10px #3e1a51;
+    box-shadow: inset 0 0 10px #3e1a51;
+}
+
+.jumbotron-BLUE {
+    background-color: #325281;
+    -moz-box-shadow: inset 0 0 10px #1e3455;
+    -webkit-box-shadow: inset 0 0 10px #1e3455;
+    box-shadow: inset 0 0 10px #1e3455;
+}
+
+a {
+    color: silver;
+}
+
+a:hover, a:focus {
+    color: #c5ccd5;
+    text-decoration: underline;
+}
+
+input[type="radio"], input[type="checkbox"] {
+    margin: 5px;
+    margin-top: 1px \9;
+    background-image: none;
+}
+
+.noshadow {
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.thread {
+    padding-top:5px;
+    padding-bottom: 5px;
+}
+
+.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+    padding: 15px;
+    line-height: 1.42857143;
+    vertical-align: top;
+    border-top: none;
+    
+}
+
+table tr {
+    border-radius: 10px;
+}
+
+table {
+    border-collapse: separate;
+    border-spacing: 0 1em;
+}
+
+table td:first-child {
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+}
+
+table td:last-child {
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+}
+

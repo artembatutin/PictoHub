@@ -1,13 +1,11 @@
-﻿@model IEnumerable<PictoHub.Models.Board>
+﻿@model IEnumerable<PictoHub.Models.Thread>
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
-
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New Thread", "CreateThread", new { id = ViewBag.Board })
 </p>
 <table class="table">
     <tr>
@@ -15,25 +13,34 @@
             @Html.DisplayNameFor(model => model.Title)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Desc)
+            @Html.DisplayNameFor(model => model.Author)
         </th>
-        <th></th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Desc)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+    @foreach(var item in Model) {
+        <tr>
+            <td class="jumbotron-@Html.DisplayFor(modelItem => item.Color) thread">
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td class="jumbotron-@Html.DisplayFor(modelItem => item.Color) thread noshadow">
+                @Html.DisplayFor(modelItem => item.Author)
+            </td>
+            <td class="thread jumbotron-@Html.DisplayFor(modelItem => item.Color) noshadow">
+                @item.Date.Date.ToString("D")
+            </td>
+            <!--<td>
+                @Html.ActionLink("Edit", "Edit/" + item.Id, "Threads") |
+                @Html.ActionLink("Details", "Details/" + item.Id, "Threads") |
+                @Html.ActionLink("Delete", "Delete/" + item.Id, "Threads")
+            </td>-->
+        </tr>
+    }
 
 </table>
+
+<p>
+    @Html.ActionLink("Create New Thread", "CreateThread", new { id = ViewBag.Board })
+</p>

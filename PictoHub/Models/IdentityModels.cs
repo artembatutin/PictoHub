@@ -29,5 +29,9 @@ namespace PictoHub.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<PictoHub.Models.Thread> Threads { get; set; }
+
+        public System.Data.Entity.DbSet<PictoHub.Models.Board> Boards { get; set; }
     }
 }

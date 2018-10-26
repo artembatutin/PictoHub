@@ -12,12 +12,15 @@ namespace PictoHub.Controllers
 {
     public class ThreadsController : Controller
     {
-        private PictoHubContextDB db = new PictoHubContextDB();
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Threads
-        public ActionResult Index()
+        public ActionResult Index(int? id)
         {
-            return View(db.Threads.ToList());
+            if(id == null) {
+                return null;
+            }
+            return View(db.Threads.Find(id));
         }
 
         // GET: Threads/Details/5
@@ -32,29 +35,6 @@ namespace PictoHub.Controllers
             {
                 return HttpNotFound();
             }
-            return View(thread);
-        }
-
-        // GET: Threads/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Threads/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Board,Title,Content,Author")] Thread thread)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Threads.Add(thread);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
             return View(thread);
         }
 
