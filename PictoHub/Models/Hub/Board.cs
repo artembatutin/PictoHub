@@ -5,6 +5,7 @@ using System.Web;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using PictoHub.Models.Hub;
+using System.ComponentModel;
 
 namespace PictoHub.Models {
 
@@ -13,8 +14,14 @@ namespace PictoHub.Models {
 
         [Key]
         public int Id { get; set; }
+        [DisplayName("Board title")]
+        [Required(ErrorMessage = "This value is required")]
         public string Title { get; set; }
+        [DisplayName("Description")]
+        [Required(ErrorMessage = "This value is required")]
         public string Desc { get; set; }
+        [DisplayName("Board Color")]
+        [Required(ErrorMessage = "This value is required")]
         public HubColor Color { get; set; }
 
         public Board() {

@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using PictoHub.Models;
+using PictoHub.Models.Hub;
 
 namespace PictoHub.Controllers
 {
@@ -17,15 +18,17 @@ namespace PictoHub.Controllers
         // GET: Threads
         public ActionResult Index(int? id)
         {
-            if(id == null) {
-                return null;
-            }
-            return View(db.Threads.Find(id));
+            if (id == null)
+                return HttpNotFound();
+            ViewBag.Board = id;
+            return View(db.Threads.ToList().Where(t => t.Board == id));
         }
 
         // GET: Threads/Details/5
         public ActionResult Details(int? id)
         {
+            if (id == null && TempData["thread"] != null)
+                id = (int) TempData["thread"];
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -35,6 +38,7 @@ namespace PictoHub.Controllers
             {
                 return HttpNotFound();
             }
+            thread.GetComments(db);
             return View(thread);
         }
 
@@ -64,8 +68,51 @@ namespace PictoHub.Controllers
             {
                 db.Entry(thread).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                TempData["thread"] = thread.Id;
+                return RedirectToAction("Details");
             }
+            return View(thread);
+        }
+
+        [HttpPost]
+        public ActionResult Reply(int id, string comment, HubColor color) {
+            Thread thread = db.Threads.Find(id);
+            if (thread == null) {
+                System.Diagnostics.Debug.WriteLine("nulled");
+                return HttpNotFound();
+            }
+            thread.AddComment(db, new Models.Hub.Comment(User.Identity.Name, comment, color));
+            TempData["thread"] = thread.Id;
+            return RedirectToAction("Details");
+        }
+
+        // GET: Threads/Create
+        public ActionResult Create(int? id) {
+            if (id == null) {
+                return HttpNotFound();
+            }
+            ViewBag.Board = id;
+            return View();
+        }
+
+        // POST: Threads/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(int? id, [Bind(Include = "Id,Title,Content,Author,Color")] Thread thread) {
+            if (id == null) {
+                return HttpNotFound();
+            }
+            thread.Board = id.Value;
+            thread.Date = DateTime.Now;
+            ViewBag.Board = thread.Board;
+            if (ModelState.IsValid) {
+                db.Threads.Add(thread);
+                db.SaveChanges();
+                return View("Index", db.Threads.ToList().Where(t => t.Board == thread.Board));
+            }
+
             return View(thread);
         }
 

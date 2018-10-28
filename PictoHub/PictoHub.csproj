@@ -202,13 +202,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201810261337584_Initial.cs" />
-    <Compile Include="Migrations\201810261337584_Initial.Designer.cs">
-      <DependentUpon>201810261337584_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201810261357169_Initial1.cs" />
-    <Compile Include="Migrations\201810261357169_Initial1.Designer.cs">
-      <DependentUpon>201810261357169_Initial1.cs</DependentUpon>
+    <Compile Include="Migrations\201810282201222_Initial.cs" />
+    <Compile Include="Migrations\201810282201222_Initial.Designer.cs">
+      <DependentUpon>201810282201222_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -280,7 +276,7 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Boards\CreateThread.cshtml" />
+    <Content Include="Views\Threads\Create.cshtml" />
     <Content Include="Views\Threads\Delete.cshtml" />
     <Content Include="Views\Threads\Details.cshtml" />
     <Content Include="Views\Threads\Edit.cshtml" />
@@ -308,11 +304,8 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201810261337584_Initial.resx">
-      <DependentUpon>201810261337584_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201810261357169_Initial1.resx">
-      <DependentUpon>201810261357169_Initial1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201810282201222_Initial.resx">
+      <DependentUpon>201810282201222_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

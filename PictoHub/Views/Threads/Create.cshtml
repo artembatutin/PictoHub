@@ -25,22 +25,16 @@
     <div class="form-group">
         @Html.LabelFor(model => model.Content, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.Content, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.TextAreaFor(model => model.Content, htmlAttributes: new { @class = "form-control", rows = 8 })
             @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
         </div>
     </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.Author, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Author, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Author, "", new { @class = "text-danger" })
-        </div>
-    </div>
+    @Html.TextBoxFor(model => model.Author, new { @Value = User.Identity.Name, @type = "hidden" })
 
     <div class="form-group">
         @Html.LabelFor(model => model.Color, htmlAttributes: new { @class = "control-label col-md-2" })
-        @foreach(var col in Enum.GetValues(typeof(PictoHub.Models.Hub.HubColor))) {
+        @foreach (var col in Enum.GetValues(typeof(PictoHub.Models.Hub.HubColor))) {
             @Html.RadioButtonFor(model => model.Color, col, new { @class = "jumbotron-" + col.ToString() })
         }
         @Html.ValidationMessageFor(model => model.Color, "", new { @class = "text-danger" })

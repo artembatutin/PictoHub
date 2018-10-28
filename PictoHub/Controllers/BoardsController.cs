@@ -17,11 +17,7 @@ namespace PictoHub.Controllers
         // GET: Boards
         public ActionResult Index(int? id)
         {
-            if(id == null) {
-                return HttpNotFound();
-            }
-            ViewBag.Board = id;
-            return View(db.Threads.ToList().Where(t => t.Board == id));
+            return View(db.Boards.ToList());
         }
 
         // GET: Boards/Details/5
@@ -60,36 +56,6 @@ namespace PictoHub.Controllers
             }
 
             return View(board);
-        }
-
-        // GET: Threads/Create
-        public ActionResult CreateThread(int? id) {
-            if(id == null) {
-                return HttpNotFound();
-            }
-            ViewBag.Board = id;
-            return View();
-        }
-
-        // POST: Threads/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult CreateThread(int? id, [Bind(Include = "Id,Title,Content,Author,Color")] Thread thread) {
-            if(id == null) {
-                return HttpNotFound();
-            }
-            thread.Board = id.Value;
-            thread.Date = DateTime.Now;
-            ViewBag.Board = thread.Board;
-            if(ModelState.IsValid) {
-                db.Threads.Add(thread);
-                db.SaveChanges();
-                return View("Index", db.Threads.ToList().Where(t => t.Board == thread.Board));
-            }
-
-            return View(thread);
         }
 
         // GET: Boards/Edit/5

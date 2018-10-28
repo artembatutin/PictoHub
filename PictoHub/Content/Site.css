@@ -105,6 +105,7 @@ footer {
 
 .jumbotron p {
     margin-left: 15px;
+    margin-top: 10px;
 }
 
 .jumbotron-GREEN {
@@ -209,3 +210,42 @@ table td:last-child {
     border-top-right-radius: 10px;
 }
 
+.link-row:hover {
+    cursor: pointer;
+}
+
+.author {
+    margin-top: 30px;
+    font-size: 24px;
+    padding-top: 15px;
+}
+
+.back-bar {
+    display:block;
+    width: 7px;
+    border-radius: 5px;
+    background-color: silver;
+}
+
+@media screen and (max-width: 200px) .back-bar {
+    display: none;
+}
+
+.btn-default {
+    color: #f2f3f7;
+    background-color: #b17038;
+    border-color: #d48540;
+}
+
+.form-control {
+    color: #fff;
+}
+
+.thread-post {
+    margin-bottom: -30px;
+}
+
+.reply {
+    margin: 0;
+    margin-top: -30px;
+}

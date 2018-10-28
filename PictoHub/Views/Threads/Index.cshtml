@@ -4,48 +4,51 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+@if (Request.IsAuthenticated) {
+    <p>@Html.ActionLink("Create New Thread", "Create", new { id = ViewBag.Board })</p>
+}
 
-<p>
-    @Html.ActionLink("Create New", "Create", "Thread")
-</p>
 <table class="table">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Board)
-        </th>
         <th>
             @Html.DisplayNameFor(model => model.Title)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Content)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.Author)
         </th>
-        <th></th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CommentsCount)
+        </th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Board)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Content)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Author)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model) {
+        <tr class="link-row" data-href="../Details/@Html.DisplayFor(modelItem => item.Id)">
+            <td class="jumbotron-@Html.DisplayFor(modelItem => item.Color) thread">
+                @Html.DisplayFor(modelItem => item.Title)
+                @if (Request.IsAuthenticated) {
+                    @:&nbsp;
+                    @Html.ActionLink("Edit", "Edit/" + item.Id, "Threads")
+                    @:&nbsp;
+                    @Html.ActionLink("Delete", "Delete/" + item.Id, "Threads")
+                }
+            </td>
+            <td class="jumbotron-@Html.DisplayFor(modelItem => item.Color) thread noshadow">
+                @Html.DisplayFor(modelItem => item.Author)
+            </td>
+            <td class="thread jumbotron-@Html.DisplayFor(modelItem => item.Color) noshadow">
+                @item.Date.Date.ToString("D")
+            </td>
+            <td class="thread jumbotron-@Html.DisplayFor(modelItem => item.Color) noshadow">
+                @Html.DisplayFor(modelItem => item.CommentsCount)
+            </td>
+        </tr>
+    }
 
 </table>
+
+@if (Request.IsAuthenticated) {
+    <p>@Html.ActionLink("Create New Thread", "Create", new { id = ViewBag.Board })</p>
+}

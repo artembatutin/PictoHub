@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace PictoHub.Models
@@ -64,9 +65,11 @@ namespace PictoHub.Models
 
     public class RegisterViewModel
     {
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
+        [RegularExpression(@"\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*")]
         public string Email { get; set; }
 
         [Required]
@@ -78,7 +81,12 @@ namespace PictoHub.Models
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Required(ErrorMessage = "Value is required.")]
         public string ConfirmPassword { get; set; }
+
+        [DataType(DataType.Date)]
+        [Required(ErrorMessage = "Value is required.")]
+        public DateTime Birthday { get; set; }
     }
 
     public class ResetPasswordViewModel

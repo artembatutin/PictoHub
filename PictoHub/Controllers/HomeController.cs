@@ -12,7 +12,7 @@ namespace PictoHub.Controllers {
 
 
         public ActionResult Index() {
-            return View(db.Boards.ToList());
+            return Redirect("./Boards");
         }
 
         public ActionResult About() {

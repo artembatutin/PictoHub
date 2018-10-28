@@ -4,47 +4,55 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>@Html.DisplayFor(model => model.Title)</h2>
 
-<div>
-    <h4>Thread</h4>
+<div id="thread-content" class="container">
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Board)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Board)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Content)
-        </dt>
-
-        <dd>
+    <div class="thread-post jumbotron-@Html.DisplayFor(model => model.Color) jumbotron">
+        <h3>@Html.DisplayFor(model => model.Author)</h3>
+        <h4>@Model.Date.Date.ToString("D")</h4><hr />
+        <p>
             @Html.DisplayFor(model => model.Content)
-        </dd>
+        </p>
+    </div>
+    @foreach (var c in Model.Comments) {
+        <div class="reply jumbotron-@c.Color jumbotron">
+            <h4>Reply By: @c.Author - @c.Date.Date.ToString("D") </h4><hr />
+            <p>
+                @c.Content
+            </p>
+        </div>
+    }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Author)
-        </dt>
+    <br /><br />
 
-        <dd>
-            @Html.DisplayFor(model => model.Author)
-        </dd>
+    @if (Request.IsAuthenticated) {
+        using (Html.BeginForm("Reply", "Threads", FormMethod.Post)) {
+            <div class="form-group">
+                @Html.TextBox("id", Model.Id, new { @Type = "hidden" })
+                @Html.Label("Comment:", null, new { @class = "control-label col-md-2" })
+                @Html.TextArea("comment", null, new { @class = "form-control", rows = 5 })
+                <br />
+                @Html.Label("Color:", null, new { @class = "control-label col-md-2" })
 
-    </dl>
+                @foreach (var col in Enum.GetValues(typeof(PictoHub.Models.Hub.HubColor))) {
+                    @Html.RadioButton("color", col, new { @class = "jumbotron-" + col.ToString() })
+                }
+                <div class="col-md-offset-2 col-md-10">
+                    <br />
+                    <input type="submit" value="Post" class="btn btn-default" />
+                </div>
+            </div>
+        }
+    }
 </div>
+
+<br /><br />
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @if (Request.IsAuthenticated) {
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id })
+        @:&nbsp;
+    }
+    @Html.ActionLink("Back", "Index", new { id = Model.Board })
 </p>
