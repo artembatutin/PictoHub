@@ -189,6 +189,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\ApplicationRoleManager.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -202,9 +203,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201810282201222_Initial.cs" />
-    <Compile Include="Migrations\201810282201222_Initial.Designer.cs">
-      <DependentUpon>201810282201222_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\201810311841111_Initial.cs" />
+    <Compile Include="Migrations\201810311841111_Initial.Designer.cs">
+      <DependentUpon>201810311841111_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -304,8 +305,8 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201810282201222_Initial.resx">
-      <DependentUpon>201810282201222_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201810311841111_Initial.resx">
+      <DependentUpon>201810311841111_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

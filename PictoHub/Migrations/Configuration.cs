@@ -26,7 +26,11 @@ namespace PictoHub.Migrations
             boards.Add(new Board(3, "Software", "Geeky but oh well...", Models.Hub.HubColor.GREEN));
             boards.ForEach(b => context.Boards.Add(b));
 
+            context.Roles.AddOrUpdate(r => r.Name, new Microsoft.AspNet.Identity.EntityFramework.IdentityRole { Name = "Guest", Id = "g" });
+            context.Roles.AddOrUpdate(r => r.Name, new Microsoft.AspNet.Identity.EntityFramework.IdentityRole { Name = "Moderator", Id = "m" });
+            context.Roles.AddOrUpdate(r => r.Name, new Microsoft.AspNet.Identity.EntityFramework.IdentityRole { Name = "Administrator", Id = "a" });
 
+            //if(!context.Users.Any(u => u.UserName )
 
 
             //  This method will be called after migrating to the latest version.
