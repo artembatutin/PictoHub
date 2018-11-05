@@ -35,7 +35,18 @@
     <footer>
         <div class="container"
         <hr />
-        <p><img src="https://i.imgur.com/CG2tXFV.png" /></p>
+        <p>
+        <img src="https://i.imgur.com/CG2tXFV.png" />
+        @if (User.IsInRole("Admin")) {
+            <a>Administrator</a>
+        }
+        @if (User.IsInRole("Mod")) {
+            <a>Moderator</a>
+        }
+        @if (User.IsInRole("Banned")) {
+            <a>Banned</a>
+        }
+        </p>
         </div>
     </footer>
 

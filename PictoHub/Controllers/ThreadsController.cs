@@ -76,6 +76,9 @@ namespace PictoHub.Controllers
 
         [HttpPost]
         public ActionResult Reply(int id, string comment, HubColor color) {
+            if(User.IsInRole("Banned")) {
+                return HttpNotFound();// banned users can't post replies.
+            }
             Thread thread = db.Threads.Find(id);
             if (thread == null) {
                 System.Diagnostics.Debug.WriteLine("nulled");
@@ -101,6 +104,9 @@ namespace PictoHub.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(int? id, [Bind(Include = "Id,Title,Content,Author,Color")] Thread thread) {
+            if (User.IsInRole("Banned")) {
+                return HttpNotFound();// banned users can't post threads.
+            }
             if (id == null) {
                 return HttpNotFound();
             }
@@ -117,6 +123,8 @@ namespace PictoHub.Controllers
         }
 
         // GET: Threads/Delete/5
+        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Mod")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -134,6 +142,8 @@ namespace PictoHub.Controllers
         // POST: Threads/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Mod")]
         public ActionResult DeleteConfirmed(int id)
         {
             Thread thread = db.Threads.Find(id);

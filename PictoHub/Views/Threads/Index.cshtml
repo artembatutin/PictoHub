@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
 }
 
-@if (Request.IsAuthenticated) {
+@if (Request.IsAuthenticated && !User.IsInRole("Banned")) {
     <p>@Html.ActionLink("Create New Thread", "Create", new { id = ViewBag.Board })</p>
 }
 
@@ -28,7 +28,7 @@
         <tr class="link-row" data-href="../Details/@Html.DisplayFor(modelItem => item.Id)">
             <td class="jumbotron-@Html.DisplayFor(modelItem => item.Color) thread">
                 @Html.DisplayFor(modelItem => item.Title)
-                @if (Request.IsAuthenticated) {
+                @if (Request.IsAuthenticated && (User.IsInRole("Admin") || User.IsInRole("Mod"))) {
                     @:&nbsp;
                     @Html.ActionLink("Edit", "Edit/" + item.Id, "Threads")
                     @:&nbsp;
@@ -49,6 +49,6 @@
 
 </table>
 
-@if (Request.IsAuthenticated) {
+@if (Request.IsAuthenticated && !User.IsInRole("Banned")) {
     <p>@Html.ActionLink("Create New Thread", "Create", new { id = ViewBag.Board })</p>
 }

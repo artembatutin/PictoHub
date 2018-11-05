@@ -13,12 +13,12 @@ namespace PictoHub.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201810311841111_Initial"; }
+            get { return "201811050147120_Initial"; }
         }
         
         string IMigrationMetadata.Source
         {
-            get { return Resources.GetString("Source"); }
+            get { return null; }
         }
         
         string IMigrationMetadata.Target

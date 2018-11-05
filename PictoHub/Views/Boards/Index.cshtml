@@ -11,14 +11,16 @@
             <div class="jumbotron-@Html.DisplayFor(modelItem => item.Color) jumbotron">
                 <h2>@Html.DisplayFor(modelItem => item.Title)</h2>
                 <p class="lead">@Html.DisplayFor(modelItem => item.Desc)</p>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                @if (Request.IsAuthenticated && User.IsInRole("Admin")) {
+                    Html.ActionLink("Edit  ", "Edit", new { id = item.Id });
+                    Html.ActionLink("  Delete", "Delete", new { id = item.Id });
+                }
             </div>
         </a>
     </div>
 }
 
 
-@if (Request.IsAuthenticated) {
+@if (Request.IsAuthenticated && User.IsInRole("Admin")) {
     <p> @Html.ActionLink("Create New Board", "Create", "Boards")</p>
 }
